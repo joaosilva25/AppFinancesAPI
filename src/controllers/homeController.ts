@@ -8,37 +8,35 @@ import validator from 'validator'
 export const addUserDates=async(req:Request, res:Response) => {
     const {email,password,userName}=req.body
 
-    let validateEmail=validator.isEmail(email)
-    let validatePass=validator.isStrongPassword(password, {
-        minLength:6,
-        minUppercase:1,
-        minSymbols:1,
-        minLowercase:1,
-    })
+    if (email && password && userName) {
+        let validateEmail=validator.isEmail(email)
+        let validatePass=validator.isStrongPassword(password, {
+            minLength:6,
+            minUppercase:1,
+            minSymbols:1,
+            minLowercase:1,
+        })
 
-    if(validateEmail && validatePass) {
-        try {
-            if (validateEmail && password && userName) {	
-
+        if(validateEmail && validatePass) {
+            try {
                 let hashPass=bcrypt.hashSync(password,10)
-
                 await RegisterUser(req,res,email,hashPass,userName)
             }
-            else {
-                res.status(400).json("Preencha os campos para prosseguir")
+            catch (error) {
+                res.status(400).json("Erro inesperado")
             }
         }
-        catch (error) {
-            res.status(400).json("Erro inesperado")
+        else {
+            if(!validateEmail) {
+                res.status(400).json("Cadastre um email válido")
+            }
+            else if(!validatePass) {
+                res.status(400).json("Sua senha deve ter no mínimo 6 caracteres Deve conter pelo menos 1 letra maiúscula.Deve conter pelo menos 1 símbolo especial (por exemplo, !@#$%^&*).Deve conter pelo menos 1 letra minúscula.")
+            }
         }
     }
     else {
-        if(!validateEmail) {
-            res.status(400).json("Cadastre um email válido")
-        }
-        else if(!validatePass) {
-            res.status(400).json("Sua senha deve ter no mínimo 6 caracteres Deve conter pelo menos 1 letra maiúscula.Deve conter pelo menos 1 símbolo especial (por exemplo, !@#$%^&*).Deve conter pelo menos 1 letra minúscula.")
-        }
+        res.status(400).json("Preencha os campos para prosseguir")
     }
 
 }
