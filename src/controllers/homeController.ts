@@ -1,6 +1,6 @@
 import express,{NextFunction, Request,Response} from 'express'
 import { RegisterUser,addFinances,LoginUser,deleteFinances,sendConfirmationEmail,updatePass} from '../services/datesService'
-import bcrypt, { hashSync } from 'bcrypt'
+import bcrypt, { hashSync } from 'bcryptjs'
 
 
 

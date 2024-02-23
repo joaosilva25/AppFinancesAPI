@@ -3,7 +3,7 @@ import {Request,Response} from 'express';
 import UsersFinances from "../models/UsersFinances";
 import DatesFinances from "../models/DatesFinances";
 import { generateToken } from "../config/passport";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import nodemailer from "nodemailer"
 import dotenv from "dotenv";
 
