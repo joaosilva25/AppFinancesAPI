@@ -22,6 +22,9 @@ export const RegisterUser = async(req:Request,res:Response,email:string,password
             return res.json('Usuário Registrado')
         }
     }
+    else {
+        return res.status(400).json('Usuário Já Registrado')
+    }
 
 }
 

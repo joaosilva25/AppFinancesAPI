@@ -23,20 +23,20 @@ export const addUserDates=async(req:Request, res:Response) => {
                 await RegisterUser(req,res,email,hashPass,userName)
             }
             catch (error) {
-                res.status(400).json("Erro inesperado")
+                return res.status(400).json("Erro inesperado")
             }
         }
         else {
             if(!validateEmail) {
-                res.status(400).json("Cadastre um email válido")
+                return res.status(400).json("Cadastre um email válido")
             }
             else if(!validatePass) {
-                res.status(400).json("Sua senha deve ter no mínimo 6 caracteres Deve conter pelo menos 1 letra maiúscula.Deve conter pelo menos 1 símbolo especial (por exemplo, !@#$%^&*).Deve conter pelo menos 1 letra minúscula.")
+                return res.status(400).json("Sua senha deve ter no mínimo 6 caracteres Deve conter pelo menos 1 letra maiúscula.Deve conter pelo menos 1 símbolo especial (por exemplo, !@#$%^&*).Deve conter pelo menos 1 letra minúscula.")
             }
         }
     }
     else {
-        res.status(400).json("Preencha os campos para prosseguir")
+        return res.status(400).json("Preencha os campos para prosseguir")
     }
 
 }
