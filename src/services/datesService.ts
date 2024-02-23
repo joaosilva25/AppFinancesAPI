@@ -19,11 +19,11 @@ export const RegisterUser = async(req:Request,res:Response,email:string,password
 
         if(newUser && newDateUser) {
             const token=generateToken({id:newUser.id})
-            return res.json('Usuário Registrado')
+            return res.status(201).json('OK')
         }
     }
     else {
-        return res.status(400).json('Usuário Já Registrado')
+        return res.status(400).json('Usuário já Registrado')
     }
 
 }
