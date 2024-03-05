@@ -37,7 +37,10 @@ export const LoginUser=async(req:Request,res:Response,email:string,password:stri
         
         if(match) {
             const token=generateToken({id:userExist.id})
-            return res.status(201).json('Usuário Logado com sucesso')
+            return res.json({
+                userExist:userExist,
+                status:'OK'
+            })
         }
         else {
             return res.status(400).json('Senha incorreta')
