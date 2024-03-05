@@ -6,7 +6,7 @@ import { privateRoute } from '../config/passport';
 
 const routes= Router();
 
-routes.get('/login',homeController.loginUser)
+routes.post('/login',homeController.loginUser)
 routes.post('/login/sendCode',homeController.sendEmail)
 routes.post('/login/changePass',homeController.changePassword)
 routes.post('/register',homeController.addUserDates)

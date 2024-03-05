@@ -88,9 +88,10 @@ export const sendEmail=async(req:Request, res:Response) => {
     if(email) {
         let code=Math.floor(Math.random()*100000000)
         await sendConfirmationEmail(req,res,email,code)
+        return res.status(201).json(code)
     }
     else {
-        return res.json("Preeencha os campos para prosseguir")
+        return res.status(400).json("Preeencha os campos para prosseguir")
     }
 
 }

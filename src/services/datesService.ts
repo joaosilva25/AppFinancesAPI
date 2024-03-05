@@ -121,7 +121,7 @@ export const sendConfirmationEmail=async(req:Request,res:Response,email:string,c
             }
         }
         catch (err) {
-            return res.json(err)
+            return res.status(400).json("Erro inesperado")
         }
     }
 }
